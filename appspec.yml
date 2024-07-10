@@ -7,12 +7,12 @@ file_exists_behavior: OVERWRITE
 
 permissions:
   - object: /home/ubuntu/woory-backend
-    owner: ubuntu
-    group: ubuntu
+    owner: root
+    group: root
     mode: 755
 
 hooks:
   AfterInstall:
     - location: script/deploy-woory.sh
       timeout: 2000
-      runas: ubuntu
+      runas: root
