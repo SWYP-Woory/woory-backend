@@ -18,6 +18,6 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 	@Query("delete from Favorite f where f.groupUser = :groupUser and f.topic = :topic")
 	void deleteFavoriteByTopicAndGroupUser(@Param("topic") Topic topic, @Param("groupUser") GroupUser groupUser);
 
-	@Query("select f from Favorite f join fetch Topic where GroupUser = :groupUser")
+	@Query("select f from Favorite f join fetch f.topic where f.groupUser = :groupUser")
 	List<Favorite> findAllWithTopicByGroupUser(@Param("groupUser") GroupUser groupUser);
 }

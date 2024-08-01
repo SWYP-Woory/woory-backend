@@ -338,4 +338,29 @@ public class ContentService {
 
 		favoriteRepository.save(fav);
 	}
+
+	public List<FavoriteDto> getFavorites(Long groupId) {
+		Long userId = SecurityUtil.getCurrentUserId();
+		GroupUser groupUser = groupUserRepository.findByUser_UserIdAndGroup_GroupId(userId, groupId)
+			.orElseThrow(() -> new CustomException(ErrorCode.USER_GROUPS_NOT_FOUND));
+
+		List<Topic> topics = favoriteRepository.findAllWithTopicByGroupUser(groupUser)
+			.stream()
+			.map(Favorite::getTopic)
+			.toList();
+
+		List<Topic> topicWithContents = topicRepository.findAllWithContentsByTopics(topics);
+
+		List<FavoriteDto> result = new ArrayList<>();
+		for (Topic t : topicWithContents) {
+			String contentImg = t.getContent().stream()
+				.map(Content::getContentImgPath)
+				.filter(Objects::nonNull).findFirst()
+				.orElseGet(() -> null);
+
+			result.add(new FavoriteDto(t.getTopicId(), t.getIssueDate(), contentImg, t.getTopicContent()));
+		}
+
+		return result;
+	}
 }
