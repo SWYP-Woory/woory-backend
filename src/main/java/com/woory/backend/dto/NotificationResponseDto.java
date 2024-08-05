@@ -22,7 +22,7 @@ public class NotificationResponseDto {
 	private Long contentId;
 	private String reactionUser;
 	private NotificationType notificationType;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
 	private Date issueDate;
 
 	public static NotificationResponseDto fromTopicNotification(NotificationDto n) {
