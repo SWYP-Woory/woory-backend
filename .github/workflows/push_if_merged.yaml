@@ -16,8 +16,7 @@ jobs:
           fetch-depth: 0
       - run: |
           # 전역 설정 추가
-          git config --global user.name "woory-actions"
-          git config --global user.email "woory-actions@users.noreply.github.com"
+          git remote set-url git@github.com:SWYP-Woory/woory-backend.git
           
           # 실제 push 작업 수행
           git push origin feat:dev
