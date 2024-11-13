@@ -15,8 +15,11 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - run: |
-          # 전역 설정 추가
-          git remote set-url origin git@github.com:SWYP-Woory/woory-backend.git
+          # remote url 변경
+          git config remote.origin.url 'https://${TOKEN}@github.com/${REPOSITORY}.git'
           
           # 실제 push 작업 수행
           git push origin feat:dev
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: SWYP-Woory/woory-backend
