@@ -17,11 +17,9 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - run: |
-          # remote url 변경
-          git config remote.origin.url "https://$TOKEN@github.com/$REPOSITORY.git"
+          git checkout dev
+          
+          git merge feat
           
           # 실제 push 작업 수행
-          git push origin feat:dev
-        env:
-          TOKEN: x-access-token:${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: SWYP-Woory/woory-backend
+          git push origin dev
