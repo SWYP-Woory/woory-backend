@@ -27,7 +27,11 @@ jobs:
           git config --global user.email "github-actions@users.noreply.github.com"
           
           # remote url 변경
+          echo "setting remote origin address"
           git remote set-url origin "https://x-access-token:$TOKEN@github.com/$REPOSITORY.git"
+          echo "setting address to: "https://x-access-token:$TOKEN@github.com/$REPOSITORY.git"
+          git remote -v
           
           # 실제 push 작업 수행
+          echo "pushing feat to dev"
           git push origin feat:dev
