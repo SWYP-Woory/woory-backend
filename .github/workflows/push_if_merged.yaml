@@ -1,34 +1,27 @@
 name: push feat to dev
 
-permissions:
-  contents: write
-
 on:
   pull_request:
     branches: [ feat ]
     types: [ closed ]
+permissions:
+  contents: write
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-
     steps:
       # feat 변경사항 dev로 이동
       - uses: actions/checkout@v4.2.2
-      - name: push feat to dev
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY: SWYP-Woory/woory-backend
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
-          
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - run: |
           # remote url 변경
-          echo "setting remote origin address"
-          git remote set-url origin "https://x-access-token:$TOKEN@github.com/$REPOSITORY.git"
-          echo "setting address to: 'https://x-access-token:$TOKEN@github.com/$REPOSITORY.git'"
-          git remote -v
+          git config remote.origin.url "https://$TOKEN@github.com/$REPOSITORY.git"
           
           # 실제 push 작업 수행
-          echo "pushing feat to dev"
           git push origin feat:dev
+        env:
+          TOKEN: x-access-token:${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: SWYP-Woory/woory-backend
