@@ -8,6 +8,10 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
       # feat 변경사항 dev로 이동
       - uses: actions/checkout@v4.2.2
