@@ -15,8 +15,6 @@ jobs:
     steps:
       # feat 변경사항 dev로 이동
       - uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: 0
       - name: push feat to dev
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,10 +25,18 @@ jobs:
           
           # remote url 변경
           echo "setting remote origin address"
-          git remote set-url origin "https://x-access-token:$TOKEN@github.com/$REPOSITORY.git"
+          git remote add origin "https://x-access-token:$TOKEN@github.com/$REPOSITORY.git"
           echo "setting address to: 'https://x-access-token:$TOKEN@github.com/$REPOSITORY.git'"
           git remote -v
           
+          git fetch origin
+          
+          git log --oneline
+          
+          git pull origin feat
+          
+          git log --oneline
+          
           # 실제 push 작업 수행
           echo "pushing feat to dev"
-          git push origin feat:dev
+          git push origin dev
