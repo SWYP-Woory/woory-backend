@@ -16,7 +16,6 @@ jobs:
       # feat 변경사항 dev로 이동
       - uses: actions/checkout@v4.2.2
         with:
-          persist-credentials: false
           fetch-depth: 0
       - name: push feat to dev
         env:
