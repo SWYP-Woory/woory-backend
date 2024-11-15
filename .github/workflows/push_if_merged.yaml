@@ -17,6 +17,10 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - run: |
+          # 전역 설정 추가
+          git config --global user.name "woory-actions"
+          git config --global user.email "woory-actions@users.noreply.github.com"
+          
           git checkout dev
           
           git merge feat
