@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
       - name: push feat to dev
         env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: x-access-token:${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: SWYP-Woory/woory-backend
         run: |
           git config --global user.name "github-actions"
