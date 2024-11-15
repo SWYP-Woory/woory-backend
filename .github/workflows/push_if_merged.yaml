@@ -25,7 +25,7 @@ jobs:
           
           # remote url 변경
           echo "setting remote origin address"
-          git remote add origin "https://x-access-token:$TOKEN@github.com/$REPOSITORY.git"
+          git remote set-url origin "https://x-access-token:$TOKEN@github.com/$REPOSITORY.git"
           echo "setting address to: 'https://x-access-token:$TOKEN@github.com/$REPOSITORY.git'"
           git remote -v
           
