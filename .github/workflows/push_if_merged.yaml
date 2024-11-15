@@ -1,5 +1,8 @@
 name: push feat to dev
 
+permissions:
+  contents: write
+
 on:
   pull_request:
     branches: [ feat ]
@@ -8,9 +11,6 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       # feat 변경사항 dev로 이동
@@ -29,14 +29,6 @@ jobs:
           echo "setting address to: 'https://x-access-token:$TOKEN@github.com/$REPOSITORY.git'"
           git remote -v
           
-          git fetch origin
-          
-          git log --oneline
-          
-          git pull origin feat
-          
-          git log --oneline
-          
           # 실제 push 작업 수행
           echo "pushing feat to dev"
-          git push origin dev
+          git push origin feat:dev
