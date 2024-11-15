@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
       - run: |
           # remote url 변경
-          git config remote.origin.url 'https://${TOKEN}@github.com/${REPOSITORY}.git'
+          git config remote.origin.url "https://$TOKEN@github.com/$REPOSITORY.git"
           
           # 실제 push 작업 수행
           git push origin feat:dev
