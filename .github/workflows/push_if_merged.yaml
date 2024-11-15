@@ -22,6 +22,7 @@ jobs:
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY: SWYP-Woory/woory-backend
+          
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@users.noreply.github.com"
