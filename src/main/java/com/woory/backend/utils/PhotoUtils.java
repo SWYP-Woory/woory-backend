@@ -54,7 +54,11 @@ public class PhotoUtils {
 
 	private static String getFileExtensionFromURL(String imagePath) {
 		String[] split = imagePath.split("\\.");
-		return "image/" + split[split.length - 1];
+		if (split.length < 3) {
+			throw new CustomException(ErrorCode.FILE_IS_NOT_IMAGE);
+		}
+		return "image/" + split[3];
+
 	}
 
 	public static MultipartFile base64ToMultipartFile(String base64File) {

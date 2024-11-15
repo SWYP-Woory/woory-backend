@@ -3,9 +3,13 @@ name: CI/CD
 on:
   push:
     branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+    types: [ closed ]
 
 jobs:
   build:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -40,6 +44,14 @@ jobs:
           echo "${{ secrets.APPLICATION_DEV_YML }}" >> ./application-dev.yml
           echo "${{ secrets.APPLICATION_SECRET_YML }}" >> ./application-secret.yml
           echo "${{ secrets.APPLICATION_TEST_YML }}" >> ./application-test.yml
+
+      - name: keystore 파일 생성
+        shell: bash
+        run: |
+          cd src/main/resources
+          touch ./keystore.b64
+          echo "${{ secrets.KEYSTORE }}" >> ./keystore.b64
+          base64 -d -i ./keystore.b64 > ./keystore.p12
 
       - name: 테스트용 DB 설정
         uses: mirromutth/mysql-action@v1.1
@@ -77,5 +89,5 @@ jobs:
           --deployment-group-name dev
           --s3-location bucket=${{ secrets.S3_BUCKET_NAME }},bundleType=zip,key=${{ secrets.S3_BUCKET_DIR_NAME }}/$GITHUB_SHA.zip
 
-
+        
 
