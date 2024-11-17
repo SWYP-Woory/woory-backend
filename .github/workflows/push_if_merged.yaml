@@ -4,8 +4,6 @@ on:
   pull_request:
     branches: [ feat ]
     types: [ closed ]
-permissions:
-  contents: write
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
@@ -21,9 +19,13 @@ jobs:
           git config --global user.name "woory-actions"
           git config --global user.email "woory-actions@users.noreply.github.com"
           
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$REPOSITORY.git
+          
           git checkout dev
           
-          git merge feat
+          git merge feat --no-edit
           
           # 실제 push 작업 수행
           git push origin dev
+        env:
+          REPOSITORY: SWYP-Woory/woory-backend
