@@ -1,5 +1,8 @@
 name: push feat to dev
 
+permissions:
+  contents: write
+
 on:
   pull_request:
     branches: [ feat ]
