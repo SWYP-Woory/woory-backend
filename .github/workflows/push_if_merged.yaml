@@ -29,6 +29,8 @@ jobs:
           git config --global user.name "woory-actions"
           git config --global user.email "woory-actions@users.noreply.github.com"
           
+          git remote set-url origin "git@github.com:$REPOSITORY.git"
+          
           git checkout dev
           
           git merge feat --no-edit
