@@ -15,11 +15,20 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
           ssh-key: ${{ secrets.PUSH_KEY }} # 기존 GITHUB_TOKEN 대신 사용
-      - run: |
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PUSH_KEY }}" >> ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: merge and push
+        run: |
           # 전역 설정 추가
           git config --global user.name "woory-actions"
           git config --global user.email "woory-actions@users.noreply.github.com"
-                
+          
           git checkout dev
           
           git merge feat --no-edit
