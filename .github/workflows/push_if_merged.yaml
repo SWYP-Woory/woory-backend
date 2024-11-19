@@ -12,7 +12,7 @@ jobs:
     steps:
       # PR 작성자가 org에 속해있는지 확인
       - name: Check access
-        if: ${{ github.event.pull_request_author_association != 'COLLABORATOR' && github.event.pull_request_author_association != 'OWNER' }}
+        if: ${{ github.event.pull_request.author_association != 'COLLABORATOR' && github.event.pull_request.author_association != 'OWNER' }}
         run: |
           echo "Event not triggered by a collaborator."
           exit 1
