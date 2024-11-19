@@ -14,12 +14,13 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+          ssh-key: ${{ secrets.COMMIT_KEY }}
       - run: |
           # 전역 설정 추가
           git config --global user.name "woory-actions"
           git config --global user.email "woory-actions@users.noreply.github.com"
           
-          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$REPOSITORY.git"
+          git remote set-url origin "https://x-access-token:${{ secrets.COMMIT_KEY }}@github.com/$REPOSITORY.git"
           
           git checkout dev
           
