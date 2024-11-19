@@ -14,14 +14,12 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-          ssh-key: ${{ secrets.COMMIT_KEY }}
+          ssh-key: ${{ secrets.PUSH_KEY }} # 기존 GITHUB_TOKEN 대신 사용
       - run: |
           # 전역 설정 추가
           git config --global user.name "woory-actions"
           git config --global user.email "woory-actions@users.noreply.github.com"
-          
-          git remote set-url origin "https://x-access-token:${{ secrets.COMMIT_KEY }}@github.com/$REPOSITORY.git"
-          
+                
           git checkout dev
           
           git merge feat --no-edit
