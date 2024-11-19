@@ -1,6 +1,8 @@
 name: push feat to dev
 
 on:
+  push:
+    branches: [ feat ]
   pull_request:
     branches: [ feat ]
     types: [ closed ]
