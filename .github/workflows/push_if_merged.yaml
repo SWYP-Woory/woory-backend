@@ -1,16 +1,22 @@
 name: push feat to dev
 
 on:
-  push:
-    branches: [ feat ]
-  pull_request:
+  pull_request_target:
     branches: [ feat ]
     types: [ closed ]
+
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      # PR 작성자가 org에 속해있는지 확인
+      - name: Check access
+        if: ${{ github.event.pull_request_author_association != 'COLLABORATOR' && github.event.pull_request_author_association != 'OWNER' }}
+        run: |
+          echo "Event not triggered by a collaborator."
+          exit 1
+
       # feat 변경사항 dev로 이동
       - uses: actions/checkout@v4.2.2
         with:
