@@ -12,7 +12,6 @@ jobs:
       # feat 변경사항 dev로 이동
       - uses: actions/checkout@v4.2.2
         with:
-          persist-credentials: false
           fetch-depth: 0
           ssh-key: ${{ secrets.PUSH_KEY }} # 기존 GITHUB_TOKEN 대신 사용
 
