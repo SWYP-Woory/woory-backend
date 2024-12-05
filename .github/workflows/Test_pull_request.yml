@@ -1,19 +1,18 @@
 name: Test_pull_request
 
 on:
-  push:
-    branches:
-      - feat
   pull_request_target:
     branches:
       - feat
+    paths:
+      - src/**
 
 jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
       - name: Check access
-        if: ${{ github.event.pull_request.author_association != 'COLLABORATOR' && github.event.pull_request.author_association != 'MEMBER' && github.event.pull_request.author_association != 'CONTRIBUTOR'}}
+        if: ${{ github.event.pull_request.author_association != 'COLLABORATOR' && github.event.pull_request.author_association != 'MEMBER' && github.event.pull_request.author_association != 'CONTRIBUTOR' }}
         run: |
           echo "Event not triggered by a collaborator."
           exit 1
@@ -33,9 +32,9 @@ jobs:
         uses: mirromutth/mysql-action@v1.1
         with:
           mysql version: '8.0'
-          mysql database: 'woory-test'
-          mysql root password: 'root'
-          mysql password: 'root'
+          mysql database: 'test'
+          mysql user: 'test'
+          mysql password: 'test'
 
       - name: Grant execution permission to gradle
         run: chmod +x gradlew

@@ -7,3 +7,23 @@ cloud:
       auto: false
     stack:
       auto: false
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?profileSQL=true
+    username: test
+    password: test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      data-source-properties:
+        rewriteBatchedStatements: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true # 데이터베이스 생성 지연으로 스크립트 실행 가능
+  sql:
+    init:
+      mode: always
