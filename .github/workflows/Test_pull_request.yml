@@ -41,7 +41,7 @@ jobs:
           mysql version: '8.0'
           mysql database: 'test'
           mysql user: 'test'
-          mysql password: 'test'
+          mysql password: 'testtest'
 
       - name: Grant execution permission to gradle
         run: chmod +x gradlew

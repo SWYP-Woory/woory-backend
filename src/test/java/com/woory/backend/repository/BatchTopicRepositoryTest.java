@@ -1,18 +1,20 @@
 package com.woory.backend.repository;
 
+import static org.junit.jupiter.api.TestInstance.*;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.woory.backend.dto.TopicDto;
@@ -22,10 +24,11 @@ import com.woory.backend.entity.TopicSet;
 
 import jakarta.transaction.Transactional;
 
-@SpringBootTest
+@DataJpaTest
 @ActiveProfiles("test")
 @Transactional
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(Lifecycle.PER_CLASS)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class BatchTopicRepositoryTest {
 
 	@Autowired

@@ -1,6 +1,7 @@
 package com.woory.backend.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.*;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ import jakarta.transaction.Transactional;
 @DataJpaTest
 @ActiveProfiles("test")
 @Transactional
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class GroupRepositoryTest {
 
 	@Autowired
