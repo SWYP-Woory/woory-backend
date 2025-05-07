@@ -10,17 +10,22 @@ cloud:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:postgresql://localhost:5432/test?reWriteBatchedInserts=true
     username: test
     password: testtest
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
     hikari:
       data-source-properties:
-        rewriteBatchedStatements: true
+        reWriteBatchedInserts: true
+      auto-commit: false
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+
     hibernate:
       ddl-auto: update
     defer-datasource-initialization: true # 데이터베이스 생성 지연으로 스크립트 실행 가능
